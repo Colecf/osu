@@ -7,17 +7,18 @@ using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Shapes;
 using osu.Framework.Localisation;
 using osu.Game.Database;
 using osu.Game.Graphics;
+using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Online.Multiplayer;
 using osu.Game.Users;
 
 namespace osu.Game.Screens.Multiplayer
 {
-    public class DrawableRoom : ClickableContainer
+    public class DrawableRoom : OsuClickableContainer
     {
         private const float content_padding = 5;
         private const float height = 90;
@@ -227,13 +228,13 @@ namespace osu.Game.Screens.Multiplayer
                 d.FadeColour(value.GetAppropriateColour(colours), 100);
         }
 
-        private void displayBeatmap(BeatmapMetadata value)
+        private void displayBeatmap(BeatmapInfo value)
         {
             if (value != null)
             {
-                beatmapTitle.Current = localisation.GetUnicodePreference(value.TitleUnicode, value.Title);
+                beatmapTitle.Current = localisation.GetUnicodePreference(value.Metadata.TitleUnicode, value.Metadata.Title);
                 beatmapDash.Text = @" - ";
-                beatmapArtist.Current = localisation.GetUnicodePreference(value.ArtistUnicode, value.Artist);
+                beatmapArtist.Current = localisation.GetUnicodePreference(value.Metadata.ArtistUnicode, value.Metadata.Artist);
             }
             else
             {
